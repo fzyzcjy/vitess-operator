@@ -44,6 +44,7 @@ type Spec struct {
 	Mysqld                   *planetscalev2.MysqldSpec
 	ExternalDatastore        *planetscalev2.ExternalDatastore
 	DataVolumePVCSpec        *corev1.PersistentVolumeClaimSpec
+	VolumeClaimAnnotations   map[string]string
 	DataVolumePVCName        string
 	GlobalLockserver         planetscalev2.VitessLockserverParams
 	DatabaseInitScriptSecret planetscalev2.SecretSource

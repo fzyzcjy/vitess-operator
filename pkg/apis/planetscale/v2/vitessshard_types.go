@@ -232,6 +232,10 @@ type VitessShardTabletPool struct {
 	// created for this component.
 	Annotations map[string]string `json:"annotations,omitempty"`
 
+	// volumeClaimAnnotations can optionally be used to attach custom annotations to PersistentVolumeClaims
+	// created for this component.
+	VolumeClaimAnnotations map[string]string `json:"volumeClaimAnnotations,omitempty"`
+
 	// ExtraLabels can optionally be used to attach custom labels to Pods
 	// created for this component.
 	ExtraLabels map[string]string `json:"extraLabels,omitempty"`

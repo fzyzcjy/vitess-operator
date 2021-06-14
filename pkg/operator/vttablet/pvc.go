@@ -32,9 +32,10 @@ func NewPVC(key client.ObjectKey, spec *Spec) *corev1.PersistentVolumeClaim {
 
 	return &corev1.PersistentVolumeClaim{
 		ObjectMeta: metav1.ObjectMeta{
-			Namespace: key.Namespace,
-			Name:      key.Name,
-			Labels:    labels,
+			Namespace:   key.Namespace,
+			Name:        key.Name,
+			Labels:      labels,
+			Annotations: spec.VolumeClaimAnnotations,
 		},
 		Spec: *spec.DataVolumePVCSpec,
 	}
@@ -47,6 +48,8 @@ func UpdatePVCInPlace(obj *corev1.PersistentVolumeClaim, spec *Spec) {
 	// update extra labels
 	// TODO: Handle the case when labels are removed from ExtraLabels
 	update.Labels(&obj.Labels, spec.ExtraLabels)
+
+	update.Annotations(&obj.Annotations, spec.VolumeClaimAnnotations)
 
 	// The only in-place spec update that's possible is volume expansion.
 	curSize := obj.Spec.Resources.Requests[corev1.ResourceStorage]
